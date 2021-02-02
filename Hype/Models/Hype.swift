@@ -23,17 +23,26 @@ class Hype { // Classes ==> References only 1 location in the memory.
     var body: String
     var timestamp: Date
     
-    init(body: String, timestamp: Date = Date()){
+    // add CKrecord for delete and update function
+    let recordID: CKRecord.ID // ==> is a CKRecord.ID
+    // CKRecord.ID If CKRecord.ID is already UUID based, why do we have to initialize it with recordName: UUID().uuidString?  Or is that just for demonstration purposes that you can put in a custom value? YES..
+    
+    
+    // uuidString 36 hex numbers random.
+    init(body: String, timestamp: Date = Date(), recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)){
         self.body = body
         self.timestamp = timestamp
+        self.recordID = recordID
     }
 }
 
 // MARK: - CKRecord
+// ==> CKRecord is our data packages that store on the cloud, so users can use in many devices to access it. It is 3 types ==> public, private and shared.
 extension CKRecord {
     convenience init(hype: Hype) {
         // What Type of record is ck record going to be ?? Here is the Hype type.
-        self.init(recordType: HypeStrings.recordTypeKey) //To avoid the loose string >> Create the String in the struct HypeStrings.
+        // recordID: hype.recordID ===> Create init for recordID using hype.recordID
+        self.init(recordType: HypeStrings.recordTypeKey, recordID: hype.recordID) //To avoid the loose string >> Create the String in the struct HypeStrings.
         
         self.setValuesForKeys([
             //          Key     : Value from the Hype body of String
@@ -46,10 +55,8 @@ extension CKRecord {
 // MARK: - Extension Hype to convert Hype to CKRecord
 // Create Hype from CKRecord // Create One convenience location to transfer/convert the hype and ckRecord
 extension Hype {
-    
     // convenience init? need to guard if it is not nil.
     convenience init?(ckRecord: CKRecord) {
-        
         // Make Sure we get body and timestamp from Dictionary
         // grard to make sure that the value are not nil
         guard let body = ckRecord[HypeStrings.bodyKey] as? String,
@@ -57,7 +64,8 @@ extension Hype {
         
         // After the upwrap using the timestamp here.
         // self is Hype // Go to Hype then run Hype.init
-        self.init(body: body, timestamp: timestamp)
+        // add CKRecord.ID
+        self.init(body: body, timestamp: timestamp, recordID: ckRecord.recordID)
     }
 }
 // Using ckRecord to create Hype

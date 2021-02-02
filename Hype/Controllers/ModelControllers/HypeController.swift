@@ -100,6 +100,101 @@ class HypeController {
     }
     
     // MARK: - UPDATE
+    // Result<> ==> is a Result Type Enum of 2 cases success or failure.
+    func update(hype: Hype, completion: @escaping (Result<String,CloudKitError>) -> Void) {
+        
+        // <#T##[CKRecord]?#>
+        let record = CKRecord(hype: hype)
+        
+        // <#T##[CKRecord.ID]?#> ==> NO NEEDED FOR DELETE
+        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        
+        // Only specific on .changedKeys ==> Something to
+        operation.savePolicy = .changedKeys
+        operation.qualityOfService = .userInteractive
+        operation.modifyRecordsCompletionBlock = { records, recordIDs, error in
+            if let error = error {
+                print("======== ERROR ========")
+                print("Function: \(#function)")
+                print("Error: \(error)")
+                print("Description: \(error.localizedDescription)")
+                print("======== ERROR ========")
+                return completion(.failure(.ckError))
+            }
+            
+            // Find the first of records that we update it
+            guard let record = records?.first else { return(completion(.failure(.unableToUnwrap))) }
+            completion(.success("Successfully updated \(record.recordID.recordName) in CloudKit."))
+        }
+        publicDB.add(operation)
+    }
     
     // MARK: - DELETE
+    // completion == call back when those code is done, I will call you back, but you can do anything else while waiting for you.
+    // @escaping // Not drop out the memory. Still keep in escaping before disappear.. Call back later point in time
+    func delete(hype: Hype, completion: @escaping (Result<String, CloudKitError>) -> Void) {
+        
+        // [hype.recordID] ==> hype that we want to delete, no need to save, so ==> recordsToSave: nil
+        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [hype.recordID])
+        
+        // .userInteractive ==> prioritise it, speed it up.
+        operation.qualityOfService = .userInteractive
+        
+        // we are running the block after operation changed.
+        // {} not autocompleted.
+        operation.modifyRecordsCompletionBlock = { records, recordIDs, error in
+            if let error = error {
+                print("======== ERROR ========")
+                print("Function: \(#function)")
+                print("Error: \(error)")
+                print("Description: \(error.localizedDescription)")
+                print("======== ERROR ========")
+                return completion(.failure(.ckError))
+            }
+            
+            // unwrap recordID, received the first recordIDs to delete
+            guard let recordID = recordIDs?.first else { return completion(.failure(.unableToUnwrap))}
+            // completion with String to be sure we are deleting the hype with specific recordID
+            completion(.success("Successfully deleted a hype with the record id: \(recordID.recordName)"))
+        }
+        
+        // STEP 1 :: publicOrPrivateOrSharedDB.add(operation to delete to update)
+        // This is we can delete the whole array and use it for updating 
+        publicDB.add(operation)
+        
+        /*
+         // Allow you to delete 1 object at a time. ==> one single id at a time.
+         publicDB.delete(withRecordID: <#T##CKRecord.ID#>, completionHandler: <#T##(CKRecord.ID?, Error?) -> Void#>)
+         */
+    }
+    
+    func subscribeForRomoteNotifications(completion: @escaping (Bool) -> Void ) {
+        
+        let allHypesPredicate = NSPredicate(value: true)
+        
+        // Query Subscription ??? .firesOnRecordUpdate ???
+        let subscription = CKQuerySubscription(recordType: HypeStrings.recordTypeKey, predicate: allHypesPredicate, options: .firesOnRecordUpdate)
+        
+        // Set notification property to keep the hype in the cloud.
+        let notificationInfo = CKSubscription.NotificationInfo()
+        notificationInfo.title = "HYPE! A HYPE IS IN!"
+        notificationInfo.alertBody = "Can't get enough HYPES!"
+        notificationInfo.soundName = "default"
+        notificationInfo.shouldBadge = true
+        subscription.notificationInfo = notificationInfo
+        
+        publicDB.save(subscription) { (_, error) in
+            if let error = error {
+                print("======== ERROR ========")
+                print("Function: \(#function)")
+                print("Error: \(error)")
+                print("Description: \(error.localizedDescription)")
+                print("======== ERROR ========")
+                return completion(false)
+            }
+            completion(true)
+        }
+    }
 }
+
+
