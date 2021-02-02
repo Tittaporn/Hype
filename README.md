@@ -65,6 +65,8 @@ In this four day project students will learn the basics of the CloudKit framewor
 ![Screen Shot 2021-02-01 at 3 18 08 PM](https://user-images.githubusercontent.com/57606580/106560496-b95ef680-64ec-11eb-8d32-219975d613fa.png)
 ![Screen Shot 2021-02-01 at 3 35 12 PM](https://user-images.githubusercontent.com/57606580/106560497-b9f78d00-64ec-11eb-8936-be0ce6817b99.png)
 ![Screen Shot 2021-02-01 at 3 34 29 PM](https://user-images.githubusercontent.com/57606580/106560498-b9f78d00-64ec-11eb-8060-886cdd1b632d.png)
+![Screen Shot 2021-02-01 at 11 13 25 AM](https://user-images.githubusercontent.com/57606580/106561057-a4369780-64ed-11eb-80f8-6bdc45e962d2.png)
+
 
 
 ## Day 2 - Implement CKModifyRecordsOperation, and CKSubscription
