@@ -60,6 +60,13 @@ In this four day project students will learn the basics of the CloudKit framewor
 - Create the UIRefreshControl, and implement it with loadData() and set the properties in the setUpViews() method
 - Demo the finished day1 app
 
+![Screen Shot 2021-02-01 at 3 33 36 PM](https://user-images.githubusercontent.com/57606580/106560492-b8c66000-64ec-11eb-967b-d3a3c2c9e8dd.png)
+![Screen Shot 2021-02-01 at 11 50 33 AM](https://user-images.githubusercontent.com/57606580/106560495-b95ef680-64ec-11eb-8e8c-c930a0c3a9c5.png)
+![Screen Shot 2021-02-01 at 3 18 08 PM](https://user-images.githubusercontent.com/57606580/106560496-b95ef680-64ec-11eb-8d32-219975d613fa.png)
+![Screen Shot 2021-02-01 at 3 35 12 PM](https://user-images.githubusercontent.com/57606580/106560497-b9f78d00-64ec-11eb-8936-be0ce6817b99.png)
+![Screen Shot 2021-02-01 at 3 34 29 PM](https://user-images.githubusercontent.com/57606580/106560498-b9f78d00-64ec-11eb-8060-886cdd1b632d.png)
+
+
 ## Day 2 - Implement CKModifyRecordsOperation, and CKSubscription
 ### Documentation Links
 - [CKModifyRecordsOperation](https://developer.apple.com/documentation/cloudkit/ckmodifyrecordsoperation)
