@@ -198,3 +198,26 @@ class HypeController {
 }
 
 
+/* NOTE
+ 
+ Delivering notifications with CloudKit push messages: CKQuerySubscription
+ https://www.hackingwithswift.com/read/33/8/delivering-notifications-with-cloudkit-push-messages-cksubscript
+ 
+ NSOperation
+ 
+ NSOperationQueue
+ NSOperationQueue regulates the concurrent execution of operations. It acts as a priority queue, such that operations are executed in a roughly First-In-First-Out manner, with higher-priority (NSOperation.queuePriority) ones getting to jump ahead of lower-priority ones. NSOperationQueue can also limit the maximum number of concurrent operations to be executed at any given moment, using the maxConcurrentOperationCount property.
+
+ When to Use Grand Central Dispatch
+ Dispatch queues, groups, semaphores, sources, and barriers comprise an essential set of concurrency primitives, on top of which all of the system frameworks are built.
+
+ For one-off computation, or simply speeding up an existing method, it will often be more convenient to use a lightweight GCD dispatch than employ NSOperation.
+
+ When to Use NSOperation
+ NSOperation can be scheduled with a set of dependencies at a particular queue priority and quality of service. Unlike a block scheduled on a GCD queue, an NSOperation can be cancelled and have its operational state queried. And by subclassing, NSOperation can associate the result of its work on itself for future reference.
+ 
+ https://nshipster.com/nsoperation/
+ 
+
+ //______________________________________________________________________________________
+ */
