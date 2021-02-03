@@ -1,16 +1,16 @@
 //
-//  CloudKitError.swift
+//  UserError.swift
 //  Hype
 //
-//  Created by Lee McCormick on 2/1/21.
+//  Created by Lee McCormick on 2/3/21.
 //  Copyright © 2021 RYAN GREENBURG. All rights reserved.
 //
 
 import Foundation
 
-enum CloudKitError: LocalizedError {
+enum UserError: Error {
     case ckError(Error)
-    case unableToUnwrap
+    case cloudNotUpwrap
     case unexpectedRecordsFound
     case noUserLoggedIn
     
@@ -18,12 +18,12 @@ enum CloudKitError: LocalizedError {
         switch self {
         case .ckError(let error):
             return error.localizedDescription
-        case .unableToUnwrap:
-            return "Unable to get this Hype...That is not very hype."
+        case .cloudNotUpwrap:
+            return "Could not upwrap the User data."
         case .unexpectedRecordsFound:
-            return "Unexpected records returned"
+            return "Unexpected User records found. Got back different data that we thought we would."
         case .noUserLoggedIn:
-            return "no User logged In. "
+            return "No user loogged In, Check current user!"
         }
     }
 }

@@ -22,8 +22,15 @@ class HypeController {
     // MARK: - CRUD Methods
     // MARK: - CREATE
     func createHype(with text: String, completion: @escaping (Result<String, CloudKitError>) -> Void) {
+        
+        guard let currentUser = UserController.sharedInstance.currentUser else { return completion(.failure(.noUserLoggedIn))}
+        
+        
+        // add reference ==> SO WE NEED ==> UserController
+        let reference = CKRecord.Reference(recordID: currentUser.recordID, action: .deleteSelf)
+        
         // Create newHype
-        let newHype = Hype(body: text)
+        let newHype = Hype(body: text, userReference: reference)
         
         // Convert newHype to CKRecord Type
         let hypeRecord = CKRecord(hype: newHype)
@@ -40,7 +47,7 @@ class HypeController {
                     print("Error: \(error)")
                     print("Description: \(error.localizedDescription)")
                     print("======== ERROR ========")
-                    return completion(.failure(.ckError))
+                    return completion(.failure(.ckError(error)))
                 }
                 
                 // upwarp the record , and saveHype from the record. Make sure we have record
@@ -76,7 +83,7 @@ class HypeController {
                     print("Error: \(error)")
                     print("Description: \(error.localizedDescription)")
                     print("======== ERROR ========")
-                    return completion(.failure(.ckError))
+                    return completion(.failure(.ckError(error)))
                 }
                 
                 guard let records = records else { return completion(.failure(.unableToUnwrap))}
@@ -119,7 +126,7 @@ class HypeController {
                 print("Error: \(error)")
                 print("Description: \(error.localizedDescription)")
                 print("======== ERROR ========")
-                return completion(.failure(.ckError))
+                return completion(.failure(.ckError(error)))
             }
             
             // Find the first of records that we update it
@@ -149,7 +156,7 @@ class HypeController {
                 print("Error: \(error)")
                 print("Description: \(error.localizedDescription)")
                 print("======== ERROR ========")
-                return completion(.failure(.ckError))
+                return completion(.failure(.ckError(error)))
             }
             
             // unwrap recordID, received the first recordIDs to delete
@@ -207,17 +214,17 @@ class HypeController {
  
  NSOperationQueue
  NSOperationQueue regulates the concurrent execution of operations. It acts as a priority queue, such that operations are executed in a roughly First-In-First-Out manner, with higher-priority (NSOperation.queuePriority) ones getting to jump ahead of lower-priority ones. NSOperationQueue can also limit the maximum number of concurrent operations to be executed at any given moment, using the maxConcurrentOperationCount property.
-
+ 
  When to Use Grand Central Dispatch
  Dispatch queues, groups, semaphores, sources, and barriers comprise an essential set of concurrency primitives, on top of which all of the system frameworks are built.
-
+ 
  For one-off computation, or simply speeding up an existing method, it will often be more convenient to use a lightweight GCD dispatch than employ NSOperation.
-
+ 
  When to Use NSOperation
  NSOperation can be scheduled with a set of dependencies at a particular queue priority and quality of service. Unlike a block scheduled on a GCD queue, an NSOperation can be cancelled and have its operational state queried. And by subclassing, NSOperation can associate the result of its work on itself for future reference.
  
  https://nshipster.com/nsoperation/
  
-
+ 
  //______________________________________________________________________________________
  */

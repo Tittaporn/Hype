@@ -16,6 +16,9 @@ struct HypeStrings { // Structs ==> Create the new copy. Going to store in many 
     //  static makes accessible outside the struct
     fileprivate static let bodyKey = "body"
     fileprivate static let timestampKey = "timestamp"
+    
+    // add anoter string for ckReference
+    fileprivate static let userReferenceKey = "userReference"
 }
 
 // MARK: - Hype Model
@@ -27,12 +30,16 @@ class Hype { // Classes ==> References only 1 location in the memory.
     let recordID: CKRecord.ID // ==> is a CKRecord.ID
     // CKRecord.ID If CKRecord.ID is already UUID based, why do we have to initialize it with recordName: UUID().uuidString?  Or is that just for demonstration purposes that you can put in a custom value? YES..
     
+    // add variable string for ckReference
+    var userReference: CKRecord.Reference? //We are pushing update to the app, we are now adding new data, but the old data in the cloud do not have userReference, that why ? optional
+    
     
     // uuidString 36 hex numbers random.
-    init(body: String, timestamp: Date = Date(), recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)){
+    init(body: String, timestamp: Date = Date(), recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), userReference: CKRecord.Reference?){
         self.body = body
         self.timestamp = timestamp
         self.recordID = recordID
+        self.userReference = userReference
     }
 }
 
@@ -49,6 +56,11 @@ extension CKRecord {
             HypeStrings.bodyKey : hype.body,
             HypeStrings.timestampKey : hype.timestamp
         ])
+        
+        // PS. You can not set the nil value for the key
+        if let  reference = hype.userReference {
+            setValue(reference, forKey: HypeStrings.userReferenceKey)
+        }
     }
 }
 
@@ -62,10 +74,14 @@ extension Hype {
         guard let body = ckRecord[HypeStrings.bodyKey] as? String,
               let timestamp = ckRecord[HypeStrings.timestampKey] as? Date else { return nil}
         
+        // add userRef
+        let userReference = ckRecord[HypeStrings.userReferenceKey] as? CKRecord.Reference
+        
+        
         // After the upwrap using the timestamp here.
         // self is Hype // Go to Hype then run Hype.init
         // add CKRecord.ID
-        self.init(body: body, timestamp: timestamp, recordID: ckRecord.recordID)
+        self.init(body: body, timestamp: timestamp, recordID: ckRecord.recordID, userReference: userReference)
     }
 }
 // Using ckRecord to create Hype
