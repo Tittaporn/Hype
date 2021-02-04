@@ -12,17 +12,22 @@ class SignUpViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var usernameTextField: UILabel!
+    @IBOutlet weak var photoContainerView: UIView!
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchUser()
+        setupViwes()
     }
+    
+    // MARK: - Properties
+    var image: UIImage?
     
     // MARK: - Actions
     @IBAction func signupButtonTapped(_ sender: Any) {
         guard let username = usernameTextField.text, !username.isEmpty else { return }
-        UserController.sharedInstance.createUserWith(username) { (result) in
+        UserController.sharedInstance.createUserWith(username, profilePhoto: image) { (result) in
             switch result {
             case .success(let user):
                 guard let user = user else { return }
@@ -47,6 +52,12 @@ class SignUpViewController: UIViewController {
         })
     }
     
+    func setupViwes() {
+        // Make it the container to circle by this 2 lines of code.
+        photoContainerView.layer.cornerRadius = photoContainerView.frame.height / 2
+        photoContainerView.clipsToBounds = true
+    }
+    
     func presentHypeListVC() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "HypeList", bundle: nil)
@@ -56,4 +67,18 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "photoPickerVC" {
+            let destinationVC = segue.destination as? PhotoPickerViewController
+            destinationVC?.delegate = self
+        }
+    }
+}
+
+// MARK: - Extensions
+extension SignUpViewController: PhotoSelectorDelegate {
+    func photoPickerSelected(image: UIImage) {
+        // Setting the image for container to be the image
+        self.image = image
+    }
 }

@@ -12,6 +12,11 @@
 		361CB35E25C8837C003A1294 /* HypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361CB35D25C8837C003A1294 /* HypeController.swift */; };
 		361CB36225C88642003A1294 /* CloudKitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361CB36125C88642003A1294 /* CloudKitError.swift */; };
 		361CB36725C8A0C9003A1294 /* HypeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361CB36625C8A0C9003A1294 /* HypeListViewController.swift */; };
+		3665307725CC76C200304002 /* PhotoPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3665307525CC76C200304002 /* PhotoPicker.storyboard */; };
+		3665307B25CC798200304002 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3665307A25CC798200304002 /* PhotoPickerViewController.swift */; };
+		3665307E25CC79AA00304002 /* HypePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3665307D25CC79AA00304002 /* HypePhotoViewController.swift */; };
+		3665308225CC82DC00304002 /* HypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3665308125CC82DC00304002 /* HypeTableViewCell.swift */; };
+		3665308525CC9EDD00304002 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3665308425CC9EDD00304002 /* DateExtension.swift */; };
 		36D5845D25CB123D0070BABF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5845C25CB123D0070BABF /* User.swift */; };
 		36D5846025CB19700070BABF /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5845F25CB19700070BABF /* UserController.swift */; };
 		36D5846325CB1AE70070BABF /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5846225CB1AE70070BABF /* UserError.swift */; };
@@ -31,6 +36,11 @@
 		361CB35D25C8837C003A1294 /* HypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeController.swift; sourceTree = "<group>"; };
 		361CB36125C88642003A1294 /* CloudKitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitError.swift; sourceTree = "<group>"; };
 		361CB36625C8A0C9003A1294 /* HypeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeListViewController.swift; sourceTree = "<group>"; };
+		3665307625CC76C200304002 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Hype/Views/Storyboards/Hype/Views/Storyboards/Base.lproj/PhotoPicker.storyboard; sourceTree = "<group>"; };
+		3665307A25CC798200304002 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
+		3665307D25CC79AA00304002 /* HypePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypePhotoViewController.swift; sourceTree = "<group>"; };
+		3665308125CC82DC00304002 /* HypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeTableViewCell.swift; sourceTree = "<group>"; };
+		3665308425CC9EDD00304002 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		36D5845C25CB123D0070BABF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		36D5845F25CB19700070BABF /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		36D5846225CB1AE70070BABF /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
@@ -73,6 +83,7 @@
 			children = (
 				36D5846825CB34C70070BABF /* Main.storyboard */,
 				625E1205233C10690076B139 /* HypeList.storyboard */,
+				3665307525CC76C200304002 /* PhotoPicker.storyboard */,
 				625E120A233C106A0076B139 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
@@ -81,6 +92,7 @@
 		361CB35025C86F99003A1294 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3665308025CC82C200304002 /* Custom Views */,
 				361CB34C25C86CF9003A1294 /* Storyboards */,
 			);
 			path = Views;
@@ -126,6 +138,7 @@
 			children = (
 				361CB36125C88642003A1294 /* CloudKitError.swift */,
 				36D5846225CB1AE70070BABF /* UserError.swift */,
+				3665308425CC9EDD00304002 /* DateExtension.swift */,
 			);
 			path = "Helpers&Extensions";
 			sourceTree = "<group>";
@@ -135,8 +148,18 @@
 			children = (
 				361CB36625C8A0C9003A1294 /* HypeListViewController.swift */,
 				36D5846525CB301C0070BABF /* SignUpViewController.swift */,
+				3665307A25CC798200304002 /* PhotoPickerViewController.swift */,
+				3665307D25CC79AA00304002 /* HypePhotoViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3665308025CC82C200304002 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				3665308125CC82DC00304002 /* HypeTableViewCell.swift */,
+			);
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		625E11F3233C10690076B139 = {
@@ -228,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36D5846A25CB34C70070BABF /* Main.storyboard in Resources */,
+				3665307725CC76C200304002 /* PhotoPicker.storyboard in Resources */,
 				625E120C233C106A0076B139 /* LaunchScreen.storyboard in Resources */,
 				625E1209233C106A0076B139 /* Assets.xcassets in Resources */,
 				625E1207233C10690076B139 /* HypeList.storyboard in Resources */,
@@ -242,13 +266,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				625E1200233C10690076B139 /* AppDelegate.swift in Sources */,
+				3665308525CC9EDD00304002 /* DateExtension.swift in Sources */,
+				3665308225CC82DC00304002 /* HypeTableViewCell.swift in Sources */,
 				361CB35E25C8837C003A1294 /* HypeController.swift in Sources */,
 				36D5846025CB19700070BABF /* UserController.swift in Sources */,
 				361CB36725C8A0C9003A1294 /* HypeListViewController.swift in Sources */,
 				36D5846625CB301C0070BABF /* SignUpViewController.swift in Sources */,
 				625E1202233C10690076B139 /* SceneDelegate.swift in Sources */,
 				36D5846325CB1AE70070BABF /* UserError.swift in Sources */,
+				3665307E25CC79AA00304002 /* HypePhotoViewController.swift in Sources */,
 				361CB35925C8754D003A1294 /* Hype.swift in Sources */,
+				3665307B25CC798200304002 /* PhotoPickerViewController.swift in Sources */,
 				361CB36225C88642003A1294 /* CloudKitError.swift in Sources */,
 				36D5845D25CB123D0070BABF /* User.swift in Sources */,
 			);
@@ -257,6 +285,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3665307525CC76C200304002 /* PhotoPicker.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3665307625CC76C200304002 /* Base */,
+			);
+			name = PhotoPicker.storyboard;
+			sourceTree = "<group>";
+		};
 		36D5846825CB34C70070BABF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

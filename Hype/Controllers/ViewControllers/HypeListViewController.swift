@@ -105,7 +105,7 @@ class HypeListViewController: UIViewController {
                     }
                 }
             } else { // if we DO NOT have hype then create the hype
-                HypeController.shared.createHype(with: text) { (result) in
+                HypeController.shared.createHype(with: text, photo: nil) { (result) in
                     switch result {
                     case .success(let response):
                         print(response) //print the Result Successfully String in HypeController.shared.createHype() method == "Successfully save a Hype."
@@ -131,11 +131,11 @@ extension HypeListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "hypeCell", for: indexPath)
+        // Can not gaurd here because hype for cell might be optional, so the return just use ??
+        let cell = tableView.dequeueReusableCell(withIdentifier: "hypeCell", for: indexPath) as? HypeTableViewCell
         let hype = HypeController.shared.hypes[indexPath.row]
-        cell.textLabel?.text = hype.body
-        cell.detailTextLabel?.text = "\(hype.timestamp)"
-        return cell
+        cell?.hype = hype
+        return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -168,7 +168,6 @@ extension HypeListViewController: UITableViewDelegate, UITableViewDataSource {
         let hypeToUpdate = HypeController.shared.hypes[indexPath.row]
         presentHypeAlert(hype: hypeToUpdate)
     }
-    
 }
 
 extension HypeListViewController: UITextFieldDelegate {

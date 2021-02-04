@@ -7,6 +7,7 @@
 //
 
 import CloudKit
+import UIKit
 
 class UserController {
     // MARK: - Properties
@@ -16,14 +17,14 @@ class UserController {
     
     // MARK: - CRUD Methods
     // CREATE
-    func createUserWith(_ username: String, completion: @escaping (Result<User?, UserError>) -> Void) {
+    func createUserWith(_ username: String, profilePhoto: UIImage?, completion: @escaping (Result<User?, UserError>) -> Void) {
         // Every apple account have a reference, we are grabbing thier appleIDrefernce.
         // We need to get the appleID reference in order to create the user
         fetchAppleUserRefernce { (result) in
             switch result {
             case .success(let reference):
                 guard let reference = reference else { return completion(.failure(.noUserLoggedIn))}
-                let newUser = User(username: username, appleUserRef: reference)
+                let newUser = User(username: username, appleUserRef: reference, profilePhoto: profilePhoto)
                 let record = CKRecord(user: newUser)
                 self.publicDB.save(record) { (record, error) in
                     if let error = error {
@@ -40,7 +41,7 @@ class UserController {
         }
     }
     
-    
+    // READ
     func fetchUer(completion: @escaping (Result<User?, UserError>) -> Void) {
         fetchAppleUserRefernce { (result) in
             switch result {
@@ -64,8 +65,23 @@ class UserController {
         }
     }
     
+    // Fetch the user for the hype
+    func fetchUserFor(_ hype: Hype, completion: @escaping (Result<User,UserError>) -> Void) {
+        guard let userID = hype.userReference?.recordID else { return completion(.failure(.noUserForHype))}
+        let predicate = NSPredicate(format: "%K == %@", argumentArray: ["recordID", userID])
+        let query = CKQuery(recordType: UserStrings.recordTypeKey, predicate: predicate)
+        publicDB.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                completion(.failure(.ckError(error)))
+            }
+            guard let record = records?.first else { return completion(.failure(.unexpectedRecordsFound))}
+            guard let foundUser = User(ckRecord: record) else { return completion(.failure(.cloudNotUpwrap))}
+            print("Found user for hype")
+            completion(.success(foundUser))
+            
+        }
+    }
     
-    // READ
     // private ==> preventing ???
     private func fetchAppleUserRefernce(completion: @escaping (Result<CKRecord.Reference?, UserError>) -> Void) {
         // Using the default().fetchUserRecordID to fetch

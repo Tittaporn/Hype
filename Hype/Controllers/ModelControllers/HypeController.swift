@@ -7,6 +7,7 @@
 //
 
 import CloudKit //Needed to import Cloudkit to work with Hype
+import UIKit
 
 class HypeController {
     
@@ -21,7 +22,7 @@ class HypeController {
     
     // MARK: - CRUD Methods
     // MARK: - CREATE
-    func createHype(with text: String, completion: @escaping (Result<String, CloudKitError>) -> Void) {
+    func createHype(with text: String, photo: UIImage?, completion: @escaping (Result<String, CloudKitError>) -> Void) {
         
         guard let currentUser = UserController.sharedInstance.currentUser else { return completion(.failure(.noUserLoggedIn))}
         
@@ -30,7 +31,7 @@ class HypeController {
         let reference = CKRecord.Reference(recordID: currentUser.recordID, action: .deleteSelf)
         
         // Create newHype
-        let newHype = Hype(body: text, userReference: reference)
+        let newHype = Hype(body: text, userReference: reference, hypePhoto: photo)
         
         // Convert newHype to CKRecord Type
         let hypeRecord = CKRecord(hype: newHype)

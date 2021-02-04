@@ -47,7 +47,7 @@
                                     <constraint firstAttribute="width" secondItem="6od-i1-JEF" secondAttribute="height" multiplier="1:1" id="k7s-W7-wfU"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="u9y-PL-QgT" kind="embed" identifier="photoPickerVC" id="WYJ-vS-VWj"/>
+                                    <segue destination="9o4-AI-hob" kind="embed" id="WYJ-vS-VWj"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -67,7 +67,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="photoContainerView" destination="6od-i1-JEF" id="SqL-vw-ai1"/>
                         <outlet property="usernameTextField" destination="1dC-Yk-0Dr" id="Wbp-on-fuh"/>
                     </connections>
                 </viewController>
@@ -83,13 +82,19 @@
             </objects>
             <point key="canvasLocation" x="-631" y="-159"/>
         </scene>
-        <!--PhotoPicker-->
-        <scene sceneID="XLZ-6x-cHc">
+        <!--View Controller-->
+        <scene sceneID="bN0-IK-fAk">
             <objects>
-                <viewControllerPlaceholder storyboardName="PhotoPicker" id="u9y-PL-QgT" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Txb-Aa-quE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="9o4-AI-hob" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZFT-M6-xXR">
+                        <rect key="frame" x="0.0" y="0.0" width="187" height="187"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cUS-OI-swO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-213" y="137"/>
+            <point key="canvasLocation" x="-297" y="133"/>
         </scene>
     </scenes>
     <resources>

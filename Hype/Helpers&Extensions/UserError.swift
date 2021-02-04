@@ -13,6 +13,7 @@ enum UserError: Error {
     case cloudNotUpwrap
     case unexpectedRecordsFound
     case noUserLoggedIn
+    case noUserForHype
     
     var errorDescription: String {
         switch self {
@@ -24,6 +25,8 @@ enum UserError: Error {
             return "Unexpected User records found. Got back different data that we thought we would."
         case .noUserLoggedIn:
             return "No user loogged In, Check current user!"
+        case .noUserForHype:
+            return "No user was found to be associated with this Hype."
         }
     }
 }

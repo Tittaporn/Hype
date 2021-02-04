@@ -7,6 +7,7 @@
 //
 
 import CloudKit //CloudKit import Foundation upter the hood
+import UIKit
 
 // MARK: - HypeStrings
 struct HypeStrings { // Structs ==> Create the new copy. Going to store in many places in the memory. Struct Do Not need init because it is automatically created under the hood.
@@ -19,6 +20,9 @@ struct HypeStrings { // Structs ==> Create the new copy. Going to store in many 
     
     // add anoter string for ckReference
     fileprivate static let userReferenceKey = "userReference"
+    
+    // add this for the photo
+    fileprivate static let photoAssetKey = "photoAsset"
 }
 
 // MARK: - Hype Model
@@ -33,13 +37,53 @@ class Hype { // Classes ==> References only 1 location in the memory.
     // add variable string for ckReference
     var userReference: CKRecord.Reference? //We are pushing update to the app, we are now adding new data, but the old data in the cloud do not have userReference, that why ? optional
     
+    // add User for Photo
+    var user: User?
+    var hypePhoto: UIImage? {
+        get { // GET run when ever you assign something to this property
+            // Go get the photo Data
+            guard let photoData = self.photoData else { return nil }
+            return UIImage(data: photoData)
+        } set { // newValue? ==> Part of get set
+            // saving space in dataBase 0.5
+            // And Set the photoData to HypePhoto
+            photoData = newValue?.jpegData(compressionQuality: 0.5)
+        }
+    }
+    
+    var photoData: Data? // if we have photoData then create hyoePhoto then Using photoData to create photoAsset to the save in the cloud
+    
+    // We can have photoAsset.., soundAsset...
+    var photoAsset: CKAsset? { // Require for large amount of the CKAsset, Only Work with Could kit
+        get {
+            // Without this guard, unable to create Hypes without photos
+            guard photoData != nil else { return nil}
+            let tempDirectory = NSTemporaryDirectory()
+            let tempDirectoryURL = URL(fileURLWithPath: tempDirectory)
+            
+            // place to save it in the cloud
+            let fileURL = tempDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
+            
+            // When do we use do try, catch, anytime you see throw, we have to use do try catch
+            // try might be using somewhere else.. with out do {..} catch {...}
+            // try .. do {..} catch {...}
+            // write those data in the cloud
+            do {
+                try photoData?.write(to: fileURL)
+            } catch {
+                print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+            }
+            return CKAsset(fileURL: fileURL)
+        }
+    }
     
     // uuidString 36 hex numbers random.
-    init(body: String, timestamp: Date = Date(), recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), userReference: CKRecord.Reference?){
+    init(body: String, timestamp: Date = Date(), recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), userReference: CKRecord.Reference?, hypePhoto: UIImage?){
         self.body = body
         self.timestamp = timestamp
         self.recordID = recordID
         self.userReference = userReference
+        self.hypePhoto = hypePhoto
     }
 }
 
@@ -61,6 +105,10 @@ extension CKRecord {
         if let  reference = hype.userReference {
             setValue(reference, forKey: HypeStrings.userReferenceKey)
         }
+        
+        if hype.photoAsset != nil {
+            setValue(hype.photoAsset, forKey: HypeStrings.photoAssetKey)
+        }
     }
 }
 
@@ -77,11 +125,23 @@ extension Hype {
         // add userRef
         let userReference = ckRecord[HypeStrings.userReferenceKey] as? CKRecord.Reference
         
+        // add photo
+        var foundPhoto: UIImage?
+        
+        // if foundPhoto is nil.... then don't run this block
+        if let photoAsset = ckRecord[HypeStrings.photoAssetKey] as? CKAsset {
+            do {
+                let data = try Data(contentsOf: photoAsset.fileURL!) //! make your app crash if value is nil.
+                foundPhoto = UIImage(data: data)
+            } catch {
+                print("Could Not Transform Asset to Data")
+            }
+        }
         
         // After the upwrap using the timestamp here.
         // self is Hype // Go to Hype then run Hype.init
         // add CKRecord.ID
-        self.init(body: body, timestamp: timestamp, recordID: ckRecord.recordID, userReference: userReference)
+        self.init(body: body, timestamp: timestamp, recordID: ckRecord.recordID, userReference: userReference, hypePhoto: foundPhoto)
     }
 }
 // Using ckRecord to create Hype
