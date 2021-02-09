@@ -12,6 +12,14 @@
 		361CB35E25C8837C003A1294 /* HypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361CB35D25C8837C003A1294 /* HypeController.swift */; };
 		361CB36225C88642003A1294 /* CloudKitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361CB36125C88642003A1294 /* CloudKitError.swift */; };
 		361CB36725C8A0C9003A1294 /* HypeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361CB36625C8A0C9003A1294 /* HypeListViewController.swift */; };
+		361F732D25D1BAC500E56A67 /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361F732C25D1BAC500E56A67 /* StyleGuide.swift */; };
+		361F733025D1BB7F00E56A67 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 361F732F25D1BB7F00E56A67 /* Colors.xcassets */; };
+		361F733525D1C4CB00E56A67 /* HypeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361F733425D1C4CB00E56A67 /* HypeTextField.swift */; };
+		361F733C25D1CD9F00E56A67 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 361F733925D1CD9F00E56A67 /* Lato-Bold.ttf */; };
+		361F733D25D1CD9F00E56A67 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 361F733A25D1CD9F00E56A67 /* Lato-Regular.ttf */; };
+		361F733E25D1CD9F00E56A67 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 361F733B25D1CD9F00E56A67 /* Lato-Light.ttf */; };
+		361F734325D1DBC900E56A67 /* HypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361F734225D1DBC900E56A67 /* HypeButton.swift */; };
+		361F734725D1E20300E56A67 /* HypeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361F734625D1E20300E56A67 /* HypeLabel.swift */; };
 		3665307725CC76C200304002 /* PhotoPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3665307525CC76C200304002 /* PhotoPicker.storyboard */; };
 		3665307B25CC798200304002 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3665307A25CC798200304002 /* PhotoPickerViewController.swift */; };
 		3665307E25CC79AA00304002 /* HypePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3665307D25CC79AA00304002 /* HypePhotoViewController.swift */; };
@@ -36,6 +44,14 @@
 		361CB35D25C8837C003A1294 /* HypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeController.swift; sourceTree = "<group>"; };
 		361CB36125C88642003A1294 /* CloudKitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitError.swift; sourceTree = "<group>"; };
 		361CB36625C8A0C9003A1294 /* HypeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeListViewController.swift; sourceTree = "<group>"; };
+		361F732C25D1BAC500E56A67 /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
+		361F732F25D1BB7F00E56A67 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		361F733425D1C4CB00E56A67 /* HypeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeTextField.swift; sourceTree = "<group>"; };
+		361F733925D1CD9F00E56A67 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		361F733A25D1CD9F00E56A67 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		361F733B25D1CD9F00E56A67 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		361F734225D1DBC900E56A67 /* HypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeButton.swift; sourceTree = "<group>"; };
+		361F734625D1E20300E56A67 /* HypeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypeLabel.swift; sourceTree = "<group>"; };
 		3665307625CC76C200304002 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Hype/Views/Storyboards/Hype/Views/Storyboards/Base.lproj/PhotoPicker.storyboard; sourceTree = "<group>"; };
 		3665307A25CC798200304002 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
 		3665307D25CC79AA00304002 /* HypePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypePhotoViewController.swift; sourceTree = "<group>"; };
@@ -70,9 +86,11 @@
 		361CB34B25C86CBA003A1294 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				361F733825D1CD9F00E56A67 /* Fonts */,
 				625E11FF233C10690076B139 /* AppDelegate.swift */,
 				625E1201233C10690076B139 /* SceneDelegate.swift */,
 				625E1208233C106A0076B139 /* Assets.xcassets */,
+				361F732F25D1BB7F00E56A67 /* Colors.xcassets */,
 				625E120D233C106A0076B139 /* Info.plist */,
 			);
 			path = Resources;
@@ -92,6 +110,9 @@
 		361CB35025C86F99003A1294 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				361F734525D1E1BF00E56A67 /* Custom Labels */,
+				361F734125D1DBAD00E56A67 /* Custom Buttons */,
+				361F733325D1C49D00E56A67 /* Custom TextFields */,
 				3665308025CC82C200304002 /* Custom Views */,
 				361CB34C25C86CF9003A1294 /* Storyboards */,
 			);
@@ -139,6 +160,7 @@
 				361CB36125C88642003A1294 /* CloudKitError.swift */,
 				36D5846225CB1AE70070BABF /* UserError.swift */,
 				3665308425CC9EDD00304002 /* DateExtension.swift */,
+				361F732C25D1BAC500E56A67 /* StyleGuide.swift */,
 			);
 			path = "Helpers&Extensions";
 			sourceTree = "<group>";
@@ -152,6 +174,40 @@
 				3665307D25CC79AA00304002 /* HypePhotoViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		361F733325D1C49D00E56A67 /* Custom TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				361F733425D1C4CB00E56A67 /* HypeTextField.swift */,
+			);
+			path = "Custom TextFields";
+			sourceTree = "<group>";
+		};
+		361F733825D1CD9F00E56A67 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				361F733925D1CD9F00E56A67 /* Lato-Bold.ttf */,
+				361F733A25D1CD9F00E56A67 /* Lato-Regular.ttf */,
+				361F733B25D1CD9F00E56A67 /* Lato-Light.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		361F734125D1DBAD00E56A67 /* Custom Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				361F734225D1DBC900E56A67 /* HypeButton.swift */,
+			);
+			path = "Custom Buttons";
+			sourceTree = "<group>";
+		};
+		361F734525D1E1BF00E56A67 /* Custom Labels */ = {
+			isa = PBXGroup;
+			children = (
+				361F734625D1E20300E56A67 /* HypeLabel.swift */,
+			);
+			path = "Custom Labels";
 			sourceTree = "<group>";
 		};
 		3665308025CC82C200304002 /* Custom Views */ = {
@@ -253,8 +309,12 @@
 				36D5846A25CB34C70070BABF /* Main.storyboard in Resources */,
 				3665307725CC76C200304002 /* PhotoPicker.storyboard in Resources */,
 				625E120C233C106A0076B139 /* LaunchScreen.storyboard in Resources */,
+				361F733D25D1CD9F00E56A67 /* Lato-Regular.ttf in Resources */,
+				361F733E25D1CD9F00E56A67 /* Lato-Light.ttf in Resources */,
 				625E1209233C106A0076B139 /* Assets.xcassets in Resources */,
 				625E1207233C10690076B139 /* HypeList.storyboard in Resources */,
+				361F733025D1BB7F00E56A67 /* Colors.xcassets in Resources */,
+				361F733C25D1CD9F00E56A67 /* Lato-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				361F734325D1DBC900E56A67 /* HypeButton.swift in Sources */,
 				625E1200233C10690076B139 /* AppDelegate.swift in Sources */,
 				3665308525CC9EDD00304002 /* DateExtension.swift in Sources */,
 				3665308225CC82DC00304002 /* HypeTableViewCell.swift in Sources */,
@@ -273,11 +334,14 @@
 				361CB36725C8A0C9003A1294 /* HypeListViewController.swift in Sources */,
 				36D5846625CB301C0070BABF /* SignUpViewController.swift in Sources */,
 				625E1202233C10690076B139 /* SceneDelegate.swift in Sources */,
+				361F732D25D1BAC500E56A67 /* StyleGuide.swift in Sources */,
 				36D5846325CB1AE70070BABF /* UserError.swift in Sources */,
 				3665307E25CC79AA00304002 /* HypePhotoViewController.swift in Sources */,
 				361CB35925C8754D003A1294 /* Hype.swift in Sources */,
 				3665307B25CC798200304002 /* PhotoPickerViewController.swift in Sources */,
+				361F733525D1C4CB00E56A67 /* HypeTextField.swift in Sources */,
 				361CB36225C88642003A1294 /* CloudKitError.swift in Sources */,
+				361F734725D1E20300E56A67 /* HypeLabel.swift in Sources */,
 				36D5845D25CB123D0070BABF /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
